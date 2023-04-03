@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Current Weather</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#weather-form').submit(function(e) {
+				e.preventDefault();
+				var city = $('#city').val();
+				$.ajax({
+					url: 'getWeather.php',
+					type: 'get',
+					data: {city: city },
+					success: function(data) {
+						$('#weather-data').html('The temperature ' + ' in ' + data );
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1 style="text-align: center;font-size: 50px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Current Weather</h1>
+	<form style="text-align: center;" id="weather-form">
+		<label for="city" style="font-size: 27px;">Enter City Name:</label>
+		<input type="text" id="city" name="city" style="border-radius: 20px; font-size: 27px;">
+		<button type="submit" style="border-radius: 20px; background-color:white; font-size: 27px;">Get Weather</button>
+		<br>
+	</form>
+	<br>
+	<div style="text-align: center; font-style: italic; font-size: 27px;" id="weather-data"></div>
+</body>
+</html>
